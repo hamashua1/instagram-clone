@@ -15,7 +15,7 @@
   "type": "module",
   "main": "app.ts",
   "scripts": {
-    "start": "ts-node src/app.ts",
+    "start": "ts-node app.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
   },
   "devDependencies": {
@@ -26,9 +26,11 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.55.0",
+    "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
   }
 }

@@ -1,14 +1,14 @@
-import { createClient } from '@supabase/supabase-js'
-import 'dotenv/config'
+import { Pool } from "pg";
+import dotenv from "dotenv";
 
+dotenv.config();
 
+export const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL,
+});
+// Test connection
+pool.connect()
+  .then(() => console.log("✅ Connected to PostgreSQL"))
+  .catch(err => console.error("❌ Connection error", err));
 
-const supabaseUrl = process.env.SUPABASE_URL as string
-const supabaseKey= process.env.SUPABASE_KEY as string
-if(!supabaseUrl){
-    throw new Error('url not found ')
-}
-export const supabase = createClient(supabaseUrl,supabaseKey)
-    
-console.log(`database is connected succesfully ☁️ `)
 

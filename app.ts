@@ -2,9 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
+import "./Database/Db.ts"
 const app = express()
 app.use(cors())
-import './Database/Db.ts' 
 app.use(express.json())
 app.use(cookieParser())
 const PORT = process.env.PORT
