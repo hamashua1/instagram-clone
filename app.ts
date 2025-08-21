@@ -14,14 +14,14 @@ import { createLikesTable } from "./Schemas/likesTable.ts"
 import { createFollowersTable } from "./Schemas/followersTable.ts"
 
 async function DB() {
-  await createUsersTable();
-  await createPostsTable();
-  await createLikesTable();
-  await createFollowersTable();
+    await createUsersTable();
+    await createPostsTable();
+    await createLikesTable();
+    await createFollowersTable();
 }
 
 DB()
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`application is using port 💻 ${PORT}`)
 })

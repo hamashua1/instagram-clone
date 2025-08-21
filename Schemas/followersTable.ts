@@ -1,7 +1,7 @@
 import { pool } from "../Database/Db.ts";
 
 export async function createFollowersTable() {
-  const query = `
+    const query = `
     CREATE TABLE IF NOT EXISTS followers (
       id SERIAL PRIMARY KEY,
       follower_id INT REFERENCES users(id) ON DELETE CASCADE,
@@ -10,6 +10,6 @@ export async function createFollowersTable() {
       UNIQUE(follower_id, following_id) -- prevents duplicate follows
     );
   `;
-  await pool.query(query);
-  console.log("✅ Followers table created");
+    await pool.query(query);
+    console.log("✅ Followers table created");
 }

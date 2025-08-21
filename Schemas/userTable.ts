@@ -1,7 +1,7 @@
 import { pool } from "../Database/Db.ts";
 
 export async function createUsersTable() {
-  const query = `
+    const query = `
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       username VARCHAR(50) UNIQUE NOT NULL,
@@ -12,6 +12,6 @@ export async function createUsersTable() {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
   `;
-  await pool.query(query);
-  console.log("✅ Users table created");
+    await pool.query(query);
+    console.log("✅ Users table created");
 }
