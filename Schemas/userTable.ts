@@ -1,4 +1,4 @@
-import { pool } from "../Database/Db";
+import { pool } from "../Database/Db.ts";
 
 export async function createUsersTable() {
   const query = `
