@@ -1,6 +1,8 @@
 import { pool } from "../Database/Db.ts"
 import bcrypt from "bcrypt"
 import type { Request, Response } from 'express'
+import jwt from 'jsonwebtoken'
+import 'dotenv/config'
 
 
 interface hello {
@@ -21,7 +23,7 @@ export const createUser = async (req: Request, res: Response) => {
        VALUES ($1, $2, $3. $4, $5) RETURNING id, username, email`,
             [email, hashPassword, userName, bio, profile_pic_url])
 
-        results.row[0]
+        results.rows[0]
         res.status(201).json({ message: 'successfully added to database' })
 
     } catch (err) {
@@ -43,7 +45,13 @@ export const signIn = async (req: Request, res: Response) => {
         if (!isPasswordCorrect) {
             throw new Error('password invalid')
         }
-        res.status(201).json({ message: 'successfully signed in', results, isPasswordCorrect })
+        if (!process.env.JWT_SECRET) {
+      throw new Error("environment viarables not found")
+    }
+    const token = jwt.sign({id:user.id}, process.env.JWT_SECRET, { expiresIn: '30m' })
+    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'lax', maxAge: 30 * 30 * 500 })
+
+        res.status(201).json({ message: 'successfully signed in', results, isPasswordCorrect,token })
     } catch (err) {
         console.error(err)
         res.status(401).json({ message: 'sign in not successfull check your credentials' })
