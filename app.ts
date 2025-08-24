@@ -11,12 +11,16 @@ app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
 const PORT = process.env.PORT
+
+// 15min with 100 request rate limit to all my api routes
+
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 1000,
     message: 'too many requests'
 })
 app.use('/api/', limiter)
+
 import { createUsersTable } from "./Schemas/userTable.ts"
 import { createPostsTable } from "./Schemas/postTable.ts"
 import { createLikesTable } from "./Schemas/likesTable.ts"
