@@ -1,13 +1,22 @@
 import express from 'express'
+const app = express()
 import cors from 'cors'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
 import "./Database/Db.ts"
-const app = express()
+import rateLimit from 'express-rate-limit'
+import createUserRoutes from './routes/createUser.ts'
+app.use(createUserRoutes)
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
 const PORT = process.env.PORT
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 1000,
+    message: 'too many requests'
+})
+app.use('/api/', limiter)
 import { createUsersTable } from "./Schemas/userTable.ts"
 import { createPostsTable } from "./Schemas/postTable.ts"
 import { createLikesTable } from "./Schemas/likesTable.ts"
