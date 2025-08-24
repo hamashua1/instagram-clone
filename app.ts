@@ -16,7 +16,7 @@ const PORT = process.env.PORT
 
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 1000,
+    max: 100,
     message: 'too many requests'
 })
 app.use('/api/', limiter)
