@@ -7,7 +7,6 @@ import 'dotenv/config'
 
 interface MyJwtPayload extends JwtPayload {
     id: string,
-    role: 'admin' | 'user'
 }
 
 
