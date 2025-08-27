@@ -6,7 +6,9 @@ import cookieParser from 'cookie-parser'
 import "./Database/Db.ts"
 import rateLimit from 'express-rate-limit'
 import createUserRoutes from './routes/createUser.ts'
+import postRoutes from './routes/post.ts'
 app.use(createUserRoutes)
+app.use(postRoutes)
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
@@ -38,3 +40,6 @@ DB()
 app.listen(PORT, () => {
     console.log(`application is using port 💻 ${PORT}`)
 })
+
+
+

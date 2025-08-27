@@ -7,4 +7,4 @@ import { authenticateToken } from '../AuthService/auth'
 
 router.post('/api/post', authenticateToken, post)
 
-
+export default router
