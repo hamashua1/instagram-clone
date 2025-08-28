@@ -7,7 +7,9 @@ import "./Database/Db.ts"
 import rateLimit from 'express-rate-limit'
 import createUserRoutes from './routes/createUser.ts'
 import postRoutes from './routes/post.ts'
+import likesRoutes from './routes/post.ts'
 app.use(createUserRoutes)
+app.use(likesRoutes)
 app.use(postRoutes)
 app.use(cors())
 app.use(express.json())
