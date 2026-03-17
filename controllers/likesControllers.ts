@@ -12,6 +12,9 @@ export const likes = async(req:Request, res:Response)=>{
        ON CONFLICT (user_id, post_id) DO NOTHING
        RETURNING *`,[user_id, post_id])
 
+        if (!results.rows[0]) {
+            return res.status(200).json({ message: 'already liked' })
+        }
         res.status(201).json({ message: 'liked successfully', result: results.rows[0] })
     } catch (err) {
         console.error(err)
