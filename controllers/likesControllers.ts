@@ -4,12 +4,17 @@ import { pool } from "../Database/Db.ts"
 
 
 export const likes = async(req:Request, res:Response)=>{
-            const {post_id} = req.body
-            const {user_id} = req.params
-            const results = await pool.query(`INSERT INTO likes (user_id, post_id)
+    try {
+        const {post_id} = req.body
+        const user_id = req.user!.id
+        const results = await pool.query(`INSERT INTO likes (user_id, post_id)
        VALUES ($1, $2)
        ON CONFLICT (user_id, post_id) DO NOTHING
-       RETURNING *`,[user_id, post_id] )
-      
-    
+       RETURNING *`,[user_id, post_id])
+
+        res.status(201).json({ message: 'liked successfully', result: results.rows[0] })
+    } catch (err) {
+        console.error(err)
+        res.status(401).json({ message: 'unable to process like' })
+    }
 }

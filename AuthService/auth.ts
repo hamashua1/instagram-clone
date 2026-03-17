@@ -25,5 +25,6 @@ export const authenticateToken = async (req: Request, res: Response, next: () =>
     if(result.rows.length===0){
         return res.status(401).json({message:'user not found'})
     }
+    req.user = { id: result.rows[0].id }
     next()
 }
