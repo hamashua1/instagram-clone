@@ -4,7 +4,6 @@ import cors from 'cors'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
 import "./Database/Db.ts"
-import rateLimit from 'express-rate-limit'
 import createUserRoutes from './routes/createUser.ts'
 import postRoutes from './routes/post.ts'
 app.use(cors())
@@ -12,14 +11,6 @@ app.use(express.json())
 app.use(cookieParser())
 
 const PORT = process.env.PORT
-
-// 15min with 100 request rate limit to all my api routes
-const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    message: 'too many requests'
-})
-app.use('/api/', limiter)
 
 app.use(createUserRoutes)
 app.use(postRoutes)
